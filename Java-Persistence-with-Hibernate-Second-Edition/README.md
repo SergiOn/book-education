@@ -1,6 +1,3 @@
-# Book Education
-
-
 ## Java Persistence with Hibernate, Second Edition
 
 https://www.manning.com/books/java-persistence-with-hibernate-second-edition
