@@ -20,9 +20,9 @@ dependencies {
     compile project(":ftgo-common-jpa")
     compile project(":common-swagger")
 
-    compile "io.eventuate.tram.core:eventuate-tram-spring-events:$eventuateTramVersion"
-    compile "org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion"
-    compile "io.eventuate.tram.core:eventuate-tram-spring-jdbc-kafka:$eventuateTramVersion"
+    compile "io.eventuate.tram.core:eventuate-tram-spring-events"
+    compile "org.springframework.boot:spring-boot-starter-data-jpa"
+    compile "io.eventuate.tram.core:eventuate-tram-spring-jdbc-kafka"
 
     compile "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion"
     compile "io.micrometer:micrometer-registry-prometheus:$micrometerVersion"
@@ -32,8 +32,8 @@ dependencies {
     }
 
     testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
-    testCompile "io.eventuate.tram.core:eventuate-tram-spring-in-memory:$eventuateTramVersion"
-    testCompile "io.eventuate.util:eventuate-util-test:$eventuateUtilVersion"
+    testCompile "io.eventuate.tram.core:eventuate-tram-spring-in-memory"
+    testCompile "io.eventuate.util:eventuate-util-test"
 
     componentTestCompile "com.jayway.restassured:rest-assured:$restAssuredVersion"
     componentTestCompile "com.jayway.jsonpath:json-path:2.3.0"
@@ -43,8 +43,19 @@ dependencies {
 }
 
 dockerCompose {
+    environment.put "EVENTUATE_COMMON_VERSION", eventuateCommonImageVersion
+    environment.put "EVENTUATE_CDC_VERSION", eventuateCdcImageVersion
+    environment.put "EVENTUATE_SAGA_VERSION", eventuateTramSagasImageVersion
+    environment.put "EVENTUATE_JAVA_BASE_IMAGE_VERSION", eventuateExamplesBaseImageVersion
+    environment.put "EVENTUATE_MESSAGING_KAFKA_IMAGE_VERSION", eventuateMessagingKafkaImageVersion
+    
+    projectName = null
 
     componentTests {
+        projectName = null
+        removeOrphans = true
+        retainContainersOnStartupFailure = true
+
         startedServices = [ 'ftgo-delivery-service']
         stopContainers = true
     }

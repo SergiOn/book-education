@@ -1,5 +1,6 @@
 package net.chrisrichardson.ftgo.deliveryservice;
 
+import io.eventuate.common.spring.jdbc.EventuateTransactionTemplateConfiguration;
 import io.eventuate.tram.events.publisher.DomainEventPublisher;
 import io.eventuate.tram.spring.events.publisher.TramEventsPublisherConfiguration;
 import io.eventuate.tram.spring.inmemory.TramInMemoryConfiguration;
@@ -41,7 +42,8 @@ public class DeliveryServiceInProcessComponentTest {
   @Import({DeliveryServiceMessagingConfiguration.class,
           DeliveryServiceWebConfiguration.class,
           TramInMemoryConfiguration.class,
-          TramEventsPublisherConfiguration.class
+          TramEventsPublisherConfiguration.class,
+          EventuateTransactionTemplateConfiguration.class
   })
   public static class Config {
   }

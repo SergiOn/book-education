@@ -1,5 +1,6 @@
 package net.chrisrichardson.ftgo.orderservice.contract;
 
+import io.eventuate.common.spring.jdbc.EventuateTransactionTemplateConfiguration;
 import io.eventuate.tram.events.publisher.DomainEventPublisher;
 import io.eventuate.tram.spring.events.publisher.TramEventsPublisherConfiguration;
 import io.eventuate.tram.spring.inmemory.TramInMemoryConfiguration;
@@ -35,7 +36,7 @@ public abstract class MessagingBase {
 
   @Configuration
   @EnableAutoConfiguration
-  @Import({EventuateContractVerifierConfiguration.class, TramEventsPublisherConfiguration.class, TramInMemoryConfiguration.class})
+  @Import({EventuateContractVerifierConfiguration.class, TramEventsPublisherConfiguration.class, TramInMemoryConfiguration.class, EventuateTransactionTemplateConfiguration.class})
   public static class TestConfiguration {
 
     @Bean
